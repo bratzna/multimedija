@@ -1,21 +1,21 @@
-// dugme za resetovanje
 function resetujPolja(){
 	username.value = "";
 	password.value = "";
 }
 
 // dodavanje korisnika + logovanje
+
 var korisnici = [
 	{
 		username: "david",
 		password: "123"
 	},
 	{
-		username: "bojan",
+		username: "pera",
 		password: "123"
 	},
 	{
-		username: "ivan",
+		username: "zika",
 		password: "123"
 	}
 ]
@@ -23,82 +23,72 @@ function ulogujSe(){
 	var username = document.getElementById('username').value;
 	var password = document.getElementById('password').value;
 
-	for(var i=0; i < korisnici.length; i++){
-		if(username == korisnici[i].username && password == korisnici[i].password){
+	for(var i=0; i<korisnici.length; i++){
+		if (username == korisnici[i].username && password == korisnici[i].password) {
 			console.log(username + " je ulogovan!");
-			alert("Uspesno logovanje");
+			alert("Uspesno ste se ulogovali!");
 			window.location = "uspesno.html";
 		}
 	}
-	console.log("Korisnicko ime ili lozinka su pogresno uneti!");
+	console.log("Korisnicko ime ili lozinka nisu ispravni!");
+
+}
+// II-deo zadatka
+
+// Validacija e-maila
+function emailValidacija(inputText){
+	var formatMaila = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/;
+
+	if (inputText.value.match(formatMaila)) {
+		alert("Tacno ste uneli e-mail!");
+		return true;
+	}
+	else{
+		alert("Uneli ste pogresan e-mail!");
+		return false;
+	}
 }
 
-// II deo zadatka
+// idi dalje dugme
 
-// klik za vodjenje na novu stranicu dodajSliku
-function dalje(){
-	window.location = "dodajSliku.html";
-}
-
-// dugme za dodavanje novih polja
-function dodajPolje(){
-	var broj = document.getElementById("ime").value;
-	var polja = document.getElementById("polja");
-
-	while(polja.hasChildNodes()){
-		polja.removeChild(polja.lastChild);
-	}
-	for(i=0; i<broj; i++){
-		polja.appendChild(document.createTextNode("ime " + (i+1)));
-
-		var input = document.createElement("input");
-
-		input.type = "text-";
-		input.name = "ime-" + i;
-
-		polja.appendChild(input);
-
-		polja.appendChild(document.createElement("br"));
-
-		// dozvoljeno najvise 5 polja
-		if(broj > 5){
-			window.alert("Dozvoljeno najvise 5 polja!");
-			return;
-		}
-	}
+function idiDalje(){
+	window.location = "provera.html";
 }
 
 // III-deo zadatka
 
-// dodavanje slika
+// iskljuci sva polja
+function iskljuciPolja(){
+	var elementi = document.getElementsByTagName('input');
+	var duzinaInputa = elementi.length;
 
-var kolona = -1;
-var redova = 0;
-
-
-function dodajSliku(){
-	if(kolona >1 || kolona == -1){
-		redova++;
-
-		if(redova > 3){
-			window.alert("Uspesno dodate slike!");
-			return;
-		}
-		var noviRed = document.createElement('tr');
-
-		document.getElementById('tabela').appendChild(noviRed);
-		kolona = 0;
+	for(var i=0; i < duzinaInputa; i++){
+		elementi[i].disabled = true;
 	}
-	var red = document.getElementById('tabela').lastChild;
-
-	var td = document.createElement('td');
-	var slika = document.createElement('img');
-
-	red.appendChild(td);
-	td.appendChild(slika);
-
-	slika.src = "img/sijalica.png";
-	slika.style.width = "200px";
-
-	kolona++;
 }
+
+// provera JMBG-a
+function proveriJMBG(){
+	var n = document.getElementById('jmbg').value;
+	var duzina = n.length;
+
+	if (duzina == 13) {
+		alert('Duzina JMBG-a je ispravna!');
+	}else{
+		alert("Duzina JMBG-a nije ispravna!!!");
+	}
+}
+// provera Stringa
+function proveriString(){
+	var n = document.getElementById('jmbg').value;
+
+	if(isNaN(n) == false){
+		alert("JMBG nije string!");
+	}else{
+		alert("JMBG jeste string!");
+	}
+}
+
+
+
+
